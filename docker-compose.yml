@@ -6,16 +6,23 @@ services:
     restart: on-failure
     ports:
       - "8080:8080"
+    depends_on:
+      - hapi-fhir-mysql
+    links:
+      - hapi-fhir-mysql
+    env_file:
+      - hapi-fhir-jpaserver-start.env
   hapi-fhir-mysql:
-    image: mysql:latest
+    image: mysql:5.7.28
     container_name: hapi-fhir-mysql
     restart: always
     environment:
       MYSQL_DATABASE: 'hapi'
-      MYSQL_USER: 'admin'
-      MYSQL_PASSWORD: 'admin'
-      MYSQL_ROOT_PASSWORD: 'admin'
+    env_file:
+      - hapi-fhir-jpaserver-start.env
     volumes:
       - hapi-fhir-mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
 volumes:
   hapi-fhir-mysql:

@@ -122,10 +122,6 @@ public class HapiProperties {
     }
 
     private static String getProperty(String propertyName) {
-        String value = System.getenv(propertyName);
-        if (value != null) {
-            return value;
-        }
         Properties properties = HapiProperties.getProperties();
 
         if (properties != null) {

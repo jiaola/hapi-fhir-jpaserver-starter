@@ -136,14 +136,10 @@ public class HapiProperties {
     }
 
     private static String getProperty(String propertyName, String defaultValue) {
-        String value = System.getenv(propertyName);
-        if (value != null) {
-            return value;
-        }
         Properties properties = HapiProperties.getProperties();
 
         if (properties != null) {
-            value = properties.getProperty(propertyName);
+            String value = properties.getProperty(propertyName);
 
             if (value != null && value.length() > 0) {
                 return value;

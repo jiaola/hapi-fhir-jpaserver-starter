@@ -2,6 +2,7 @@ version: "3"
 services:
   hapi-fhir-jpaserver-start:
     build: .
+    # image: jiaola/hapi-fhir-jpaserver-starter:latest
     container_name: hapi-fhir-jpaserver-start
     restart: on-failure
     ports:

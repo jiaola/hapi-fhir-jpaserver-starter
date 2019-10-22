@@ -13,11 +13,11 @@
 
 FROM jetty:9-jre8-alpine
 
-COPY ./target/hapi-fhir-jpaserver.war /var/lib/jetty/webapps/hapi-fhir-jpaserver.war
+COPY ./target/hapi-fhir-jpaserver.war /var/lib/jetty/webapps/ROOT.war
 
 # Copy the default config file to the config directory location. It might be overridden by the docker host.
 COPY ./src/main/resources/hapi.properties /hapi-config/hapi.properties
 
 USER jetty:jetty
 EXPOSE 8080
-CMD ["java","-Dhapi.properties=/hapi-config/hapi.properties","-jar","/usr/local/jetty/start.jar"]
+CMD ["java", "-Xmx8g", "-Dhapi.properties=/hapi-config/hapi.properties","-jar","/usr/local/jetty/start.jar"]
